@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#07091a" />
+<title>Hrithik Chandra · AI / ML Engineer in Training</title>
+<meta name="description" content="Final-year BSc Computer Science (AI) student at the University of Hertfordshire. I build intelligent systems that endure, adapt, and elevate performance — from gene-expression GNNs to retrofit-intelligence platforms." />
+<meta property="og:title" content="Hrithik Chandra · AI / ML Engineer in Training" />
+<meta property="og:description" content="Curious, research-leaning ML engineer building graph-aware models, evaluation pipelines, and applied AI products." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- Starfield background -->
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<!-- Top navigation -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__brand" aria-label="Hrithik Chandra — home">
+    <span class="nav__logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-opacity=".35"/><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-opacity=".15"/></svg>
+    </span>
+    <span class="nav__name">Hrithik<span class="nav__dot">·</span><span class="nav__handle">arcturus03</span></span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#about">About</a>
+    <a href="#feature">Final Year Project</a>
+    <a href="#timeline">Journey</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact" class="nav__cta">Contact</a>
+  </nav>
+  <button class="nav__menu" id="navMenu" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" aria-label="Introduction">
+  <div class="hero__inner">
+    <div class="hero__terminal" aria-hidden="false">
+      <div class="hero__termbar">
+        <span></span><span></span><span></span>
+        <em>~/arcturus — initialising</em>
+      </div>
+      <pre class="hero__termbody"><code id="terminal"></code><span class="cursor">▍</span></pre>
+    </div>
+
+    <h1 class="hero__title">
+      <span class="hero__eyebrow">Hrithik Chandra</span>
+      <span class="hero__lead">
+        Building <em>intelligent systems</em> that
+        <span class="word-rotate" aria-hidden="true">
+          <span>endure.</span><span>adapt.</span><span>elevate performance.</span>
+        </span>
+      </span>
+    </h1>
+
+    <p class="hero__sub">
+      Final-year BSc Computer Science (AI specialisation) at the University of Hertfordshire.
+      Interested in graph-aware ML, evaluation tooling, and turning research ideas into things people can actually use.
+    </p>
+
+    <div class="hero__cta">
+      <a class="btn btn--primary" href="#feature">See my Final Year Project →</a>
+      <a class="btn btn--ghost" href="CV_HrithikChandra.pdf" download>Download CV (PDF)</a>
+      <a class="btn btn--icon" href="https://github.com/Arcturus03" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.13c-3.2.7-3.87-1.38-3.87-1.38-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.69.08-.69 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.03 0 0 .96-.31 3.15 1.17a10.93 10.93 0 0 1 5.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.74.11 3.03.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.41.36.78 1.05.78 2.13v3.16c0 .31.21.67.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5Z"/></svg>
+        GitHub
+      </a>
+      <a class="btn btn--icon" href="https://www.linkedin.com/in/hrithikchandra03/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.86 3.38-1.86 3.61 0 4.27 2.38 4.27 5.47v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+
+    <div class="hero__meta">
+      <span><span class="dot"></span> Hatfield, England · open to graduate roles &amp; internships</span>
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#about" aria-label="Scroll to about">
+    <span></span>
+    <em>scroll</em>
+  </a>
+</section>
+
+<!-- ABOUT / STORY -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section__head">
+      <span class="section__num">01</span>
+      <h2 class="section__title">The story so far</h2>
+      <p class="section__kicker">Curiosity → craft → community.</p>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__copy">
+        <p class="lede">
+          Arcturus is the brightest star in the northern sky — and historically one of the first
+          used for navigation. I picked the handle as a teenager because I liked the idea of
+          <em>guidance through curiosity</em>. Five years on, it still fits how I work.
+        </p>
+        <p>
+          I'm a final-year BSc Computer Science (AI) student at the University of Hertfordshire,
+          finishing in September 2026. My technical home is machine learning — I'm most at home when
+          a problem demands turning messy real-world structure into something a model can actually
+          learn from. My final-year project builds a custom continuous-time gene-regulatory
+          simulator and asks whether <strong>graph topology as a structural prior</strong> beats
+          pure tabular ML for gene-expression prediction. (Spoiler: with the right priors, yes.)
+        </p>
+        <p>
+          Off-keyboard, I've spent three years in student-facing leadership — Student
+          Representative, HertSquad Activator, now Student Guide. Those roles taught me what
+          shipping software books rarely do: how to translate between technical and
+          non-technical stakeholders, run on tight feedback loops, and stay calm when the
+          requirements move at 5pm on a Friday.
+        </p>
+        <p class="about__signoff">
+          I'm looking for graduate ML / data-science roles where I can own a slice of a real system
+          end-to-end — research-adjacent, but with users on the other end of the pipeline.
+        </p>
+      </div>
+
+      <ul class="pillars" aria-label="What I bring">
+        <li class="pillar">
+          <div class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg>
+          </div>
+          <h3>Curiosity</h3>
+          <p>From custom Naïve Bayes (no libraries) to ODE-driven simulators — I learn by building from scratch first, then layering frameworks on top.</p>
+        </li>
+        <li class="pillar">
+          <div class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          </div>
+          <h3>Craft</h3>
+          <p>Reproducible pipelines, OOP discipline, version-controlled experimentation. Code reviewers tell me my repos read like I expected someone else to maintain them.</p>
+        </li>
+        <li class="pillar">
+          <div class="pillar__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="13" r="3"/><circle cx="9" cy="17" r="3"/><path d="M11.5 10.2 14.5 11.8M11 11l0 4"/></svg>
+          </div>
+          <h3>Community</h3>
+          <p>Bronze + Silver Rep awards, BCS chapter member, hackathon teams of three — collaboration is where my best engineering happens.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECT (FYP) -->
+<section class="feature" id="feature">
+  <canvas id="grnCanvas" aria-hidden="true"></canvas>
+  <div class="feature__veil"></div>
+  <div class="container feature__inner">
+    <div class="section__head section__head--light">
+      <span class="section__num">02</span>
+      <h2 class="section__title">Final Year Project</h2>
+      <p class="section__kicker">Encoding biology as a graph prior for ML.</p>
+    </div>
+
+    <div class="feature__grid">
+      <div class="feature__copy">
+        <h3 class="feature__h">Predicting Gene Expression with GRN-aware GNNs</h3>
+        <p class="feature__lede">
+          Tabular ML treats every gene as an independent feature. Cells don't.
+          I'm asking whether wiring the <em>causal regulatory graph</em> straight into the
+          model's inductive bias produces better predictions than throwing all of it into a
+          regressor and hoping.
+        </p>
+
+        <ul class="feature__bullets">
+          <li><strong>Custom in-silico simulator</strong> — continuous-time ODE system in Python that generates synthetic transcriptomic data <em>paired with the ground-truth causal GRN</em>. So I can actually measure whether the prior helps.</li>
+          <li><strong>Topological feature engineering</strong> — node degree, centrality, motif counts via NetworkX — feeds tabular baselines a fair share of structural information.</li>
+          <li><strong>Baselines vs GNN</strong> — Ridge, Random Forest, MLP, then a GRN-aware GNN built in PyTorch Geometric.</li>
+          <li><strong>Result</strong> — graph-aware models cut MSE / MAE and lift R² when the structural prior matches the underlying causal graph. Reproducible pipeline, end-to-end.</li>
+        </ul>
+
+        <div class="feature__chips">
+          <span>Python</span><span>PyTorch Geometric</span><span>NetworkX</span><span>scikit-learn</span><span>ODEs</span><span>Reproducible ML</span>
+        </div>
+
+        <div class="feature__cta">
+          <a class="btn btn--primary" href="https://github.com/Arcturus03/gene-expression-project" target="_blank" rel="noopener">View on GitHub →</a>
+          <span class="feature__status"><span class="dot dot--live"></span> In progress · Level 6, due Sept 2026</span>
+        </div>
+      </div>
+
+      <aside class="feature__legend">
+        <h4>What you're seeing</h4>
+        <p>The animated graph behind this section is a small, randomly-rewired GRN. Nodes pulse when they "fire"; edge weight modulates with simulated regulatory pressure. Same idea, vastly slimmed down — the real simulator runs continuous-time ODEs over hundreds of nodes.</p>
+        <ul class="legend">
+          <li><span class="swatch swatch--node"></span> gene (node)</li>
+          <li><span class="swatch swatch--edge"></span> regulatory edge</li>
+          <li><span class="swatch swatch--pulse"></span> active expression</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline" id="timeline">
+  <div class="container">
+    <div class="section__head">
+      <span class="section__num">03</span>
+      <h2 class="section__title">The journey</h2>
+      <p class="section__kicker">Education, work, hackathons — in chronological order.</p>
+    </div>
+
+    <ol class="tl">
+      <li class="tl__item" data-side="left">
+        <div class="tl__marker"></div>
+        <time>2016 – 2022</time>
+        <h4>High School Diploma · CBSE / AISSCE</h4>
+        <span class="tl__org">New Horizon Scholars School, Thane, India</span>
+        <p>Foundations in maths, physics, computing. Started writing my first lines of Python.</p>
+      </li>
+      <li class="tl__item" data-side="right">
+        <div class="tl__marker"></div>
+        <time>Jan 2023</time>
+        <h4>Goldsmiths CS Programming Specialisation</h4>
+        <span class="tl__org">Goldsmiths, University of London (Coursera)</span>
+        <p>Pre-degree CS specialisation — first proper software-engineering reps.</p>
+      </li>
+      <li class="tl__item tl__item--major" data-side="left">
+        <div class="tl__marker"></div>
+        <time>Sept 2023 — Sept 2026</time>
+        <h4>BSc (Hons) Computer Science · AI specialisation</h4>
+        <span class="tl__org">University of Hertfordshire</span>
+        <p>Final-year modules: Advanced AI, Software Architecture, Final-Year Project (gene-expression GNNs).</p>
+      </li>
+      <li class="tl__item" data-side="right">
+        <div class="tl__marker"></div>
+        <time>Oct 2023 – Aug 2024</time>
+        <h4>Student Representative</h4>
+        <span class="tl__org">Hertfordshire Students' Union</span>
+        <p>Liaison between students and academic staff. <em>Bronze + Silver</em> Rep Excellence awards.</p>
+      </li>
+      <li class="tl__item" data-side="left">
+        <div class="tl__marker"></div>
+        <time>Sept 2024 – July 2025</time>
+        <h4>HertSquad Activator</h4>
+        <span class="tl__org">University of Hertfordshire</span>
+        <p>Ran sports, wellness, and social engagement programmes across campus. CSLA L2, FAA L3 First Aid.</p>
+      </li>
+      <li class="tl__item tl__item--major" data-side="right">
+        <div class="tl__marker"></div>
+        <time>Aug 2025 – Sept 2025</time>
+        <h4>ML Work Experience · Ipsos UK</h4>
+        <span class="tl__org">Ipsos UK</span>
+        <p>Built a reproducible evaluation pipeline for synthetic tabular data — pandas, numpy, scikit-learn, OOP. First taste of production-grade ML / NLP workflows.</p>
+      </li>
+      <li class="tl__item" data-side="left">
+        <div class="tl__marker"></div>
+        <time>Sept 2025 — Aug 2026</time>
+        <h4>Student Guide</h4>
+        <span class="tl__org">University of Hertfordshire</span>
+        <p>Onboarding and pastoral support for incoming students; coordinated trips to London, Oxford, Cambridge, Brighton.</p>
+      </li>
+      <li class="tl__item" data-side="right">
+        <div class="tl__marker"></div>
+        <time>Nov 2025</time>
+        <h4>Holistic AI × UCL Hackathon</h4>
+        <span class="tl__org">UCL Bloomsbury · Track 2: Trustworthy stereotype classification</span>
+        <p>Built <strong>Stereotype Stompers</strong> — fine-tuned GPT-2 on a real + synthetic + EMGSD corpus to flag biased medical text and propose alternatives.</p>
+      </li>
+      <li class="tl__item tl__item--major" data-side="left">
+        <div class="tl__marker"></div>
+        <time>Feb 2026</time>
+        <h4>HackLondon 2026 · King's College London</h4>
+        <span class="tl__org">22-hour hack · Bush House</span>
+        <p>Built <strong>RetrofitIQ</strong>: a UK property retrofit-priority scorer integrating EPC, HM Land Registry, flood, and planning data. Led backend &amp; scoring logic.</p>
+      </li>
+      <li class="tl__item tl__item--future" data-side="right">
+        <div class="tl__marker"></div>
+        <time>Sept 2026 →</time>
+        <h4>Graduate ML / Data Science roles</h4>
+        <span class="tl__org">Open to UK / hybrid · open to relocation</span>
+        <p>Looking for a team where research-adjacent ML meets shipped product.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- PROJECTS / LAB NOTEBOOK -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="section__head">
+      <span class="section__num">04</span>
+      <h2 class="section__title">Lab notebook</h2>
+      <p class="section__kicker">Selected projects, hackathons, and coursework. Filter by tag.</p>
+    </div>
+
+    <div class="filters" role="tablist" aria-label="Filter projects by tag">
+      <button class="chip is-active" data-filter="all">All</button>
+      <button class="chip" data-filter="ml">ML</button>
+      <button class="chip" data-filter="nlp">NLP</button>
+      <button class="chip" data-filter="research">Research</button>
+      <button class="chip" data-filter="web">Web</button>
+      <button class="chip" data-filter="java">Java</button>
+      <button class="chip" data-filter="hackathon">Hackathon</button>
+      <button class="chip" data-filter="industry">Industry</button>
+    </div>
+
+    <ul class="cards" id="cards">
+      <!-- Cards injected by script -->
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS / CONSTELLATION -->
+<section class="skills" id="skills">
+  <div class="container">
+    <div class="section__head">
+      <span class="section__num">05</span>
+      <h2 class="section__title">Skills constellation</h2>
+      <p class="section__kicker">Each cluster is a domain. Hover a star to see its name.</p>
+    </div>
+    <div class="constellation-wrap">
+      <svg id="constellation" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Skills grouped as constellations"></svg>
+    </div>
+    <div class="skills__legend">
+      <span><i style="background:var(--accent)"></i> Languages</span>
+      <span><i style="background:var(--accent-2)"></i> ML &amp; Data</span>
+      <span><i style="background:var(--accent-cool)"></i> Tools &amp; Frameworks</span>
+      <span><i style="background:#9ee7c5"></i> Concepts</span>
+    </div>
+
+    <div class="certs">
+      <h3>Certifications &amp; awards</h3>
+      <ul>
+        <li>IBM Data Science Professional Certificate <em>(in progress, Coursera)</em></li>
+        <li>Student Rep Award — Bronze &amp; Silver, University of Hertfordshire (2023–24)</li>
+        <li>Go Herts Award — Bronze, University of Hertfordshire (Aug 2024)</li>
+        <li>CSLA Level 2 — Community &amp; Sports Leadership Award (Sept 2024)</li>
+        <li>FAA Level 3 — Emergency First Aid at Work (RQF), Nuco Training (Sept 2024)</li>
+        <li>Adult Safeguarding in Physical Activity &amp; Sport — UK Coaching (Sept 2024)</li>
+        <li>BCS · UH Computer Science Chapter Member 23/24</li>
+        <li>Goldsmiths · Intro to CS &amp; Programming Specialization (Jan 2023)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container contact__inner">
+    <div class="section__head">
+      <span class="section__num">06</span>
+      <h2 class="section__title">Let's talk</h2>
+      <p class="section__kicker">Internships, graduate roles, research collaborations, or just to compare notes on graph ML.</p>
+    </div>
+
+    <div class="contact__grid">
+      <a class="contact__card" href="mailto:hrithik.chandra@outlook.in">
+        <span class="contact__label">Email</span>
+        <span class="contact__value">hrithik.chandra@outlook.in</span>
+        <span class="contact__cta">Send a message →</span>
+      </a>
+      <a class="contact__card" href="https://www.linkedin.com/in/hrithikchandra03/" target="_blank" rel="noopener">
+        <span class="contact__label">LinkedIn</span>
+        <span class="contact__value">/in/hrithikchandra03</span>
+        <span class="contact__cta">Connect →</span>
+      </a>
+      <a class="contact__card" href="https://github.com/Arcturus03" target="_blank" rel="noopener">
+        <span class="contact__label">GitHub</span>
+        <span class="contact__value">@Arcturus03</span>
+        <span class="contact__cta">See the code →</span>
+      </a>
+      <a class="contact__card" href="CV_HrithikChandra.pdf" download>
+        <span class="contact__label">CV</span>
+        <span class="contact__value">CV_HrithikChandra.pdf</span>
+        <span class="contact__cta">Download →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <span>© 2026 Hrithik Chandra · Built with curiosity in Hatfield.</span>
+    <span class="footer__right">
+      <a href="#top">Back to top ↑</a>
+    </span>
+  </div>
+</footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
