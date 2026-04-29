@@ -40,30 +40,46 @@
 
 <main id="top">
 
-<!-- HERO -->
-<section class="hero" aria-label="Introduction">
-  <div class="hero__inner">
-    <div class="hero__terminal" aria-hidden="false">
+<!-- TERMINAL STAGE -->
+<section class="terminal-stage" aria-label="Welcome terminal">
+  <div class="terminal-stage__inner">
+    <div class="hero__terminal hero__terminal--big">
       <div class="hero__termbar">
         <span></span><span></span><span></span>
         <em>~/arcturus — initialising</em>
       </div>
       <pre class="hero__termbody"><code id="terminal"></code><span class="cursor">▍</span></pre>
     </div>
+    <a class="terminal-stage__scroll" href="#intro" aria-label="Scroll to introduction">
+      <em>scroll</em>
+      <span class="terminal-stage__arrow" aria-hidden="true">↓</span>
+    </a>
+  </div>
+</section>
 
-    <h1 class="hero__title">
-      <span class="hero__eyebrow">Hrithik Chandra</span>
-      <span class="hero__lead">
+<!-- INTRO -->
+<section class="intro" id="intro" aria-label="Introduction">
+  <div class="intro__inner">
+    <h1 class="intro__title">
+      <span class="intro__name">HRITHIK CHANDRA</span>
+      <span class="intro__lead">
         Building <em>intelligent systems</em> that
-        <span class="word-rotate" aria-hidden="true">
-          <span>endure.</span><span>adapt.</span><span>elevate performance.</span>
+        <span class="word-reveal" data-reveal>
+          <span>endure,</span>
+          <span>adapt,</span>
+          <span>elevate&nbsp;performance.</span>
         </span>
       </span>
     </h1>
 
-    <p class="hero__sub">
-      Final-year BSc Computer Science (AI specialisation) at the University of Hertfordshire.
-      Interested in graph-aware ML, evaluation tooling, and turning research ideas into things people can actually use.
+    <p class="intro__sub">
+      Curious by default, technical by craft — a generalist with depth where it counts.
+      Final-year BSc Computer Science (AI specialisation) at the University of
+      Hertfordshire, working across machine learning, data science, and applied AI:
+      graph-aware models, synthetic-data simulators, NLP pipelines, evaluation tooling,
+      and the occasional 22-hour hackathon ship. Drawn to teams where autonomy meets
+      impact — and to industries where intelligent systems make a measurable dent:
+      tech, finance, market research, bioinformatics, automotive.
     </p>
 
     <div class="hero__cta">
@@ -83,11 +99,6 @@
       <span><span class="dot"></span> Hatfield, England · open to graduate roles &amp; internships</span>
     </div>
   </div>
-
-  <a class="hero__scroll" href="#about" aria-label="Scroll to about">
-    <span></span>
-    <em>scroll</em>
-  </a>
 </section>
 
 <!-- ABOUT / STORY -->
@@ -243,6 +254,13 @@
         <span class="tl__org">Hertfordshire Students' Union</span>
         <p>Liaison between students and academic staff. <em>Bronze + Silver</em> Rep Excellence awards.</p>
       </li>
+      <li class="tl__item" data-side="right">
+        <div class="tl__marker"></div>
+        <time>Nov 2024</time>
+        <h4>Holistic AI × UCL Hackathon</h4>
+        <span class="tl__org">UCL Bloomsbury · Track 2: Trustworthy stereotype classification</span>
+        <p>Built <strong>Stereotype Stompers</strong> — fine-tuned GPT-2 on a real + synthetic + EMGSD corpus to flag biased medical text and propose alternatives.</p>
+      </li>
       <li class="tl__item" data-side="left">
         <div class="tl__marker"></div>
         <time>Sept 2024 – July 2025</time>
@@ -264,13 +282,7 @@
         <span class="tl__org">University of Hertfordshire</span>
         <p>Onboarding and pastoral support for incoming students; coordinated trips to London, Oxford, Cambridge, Brighton.</p>
       </li>
-      <li class="tl__item" data-side="right">
-        <div class="tl__marker"></div>
-        <time>Nov 2025</time>
-        <h4>Holistic AI × UCL Hackathon</h4>
-        <span class="tl__org">UCL Bloomsbury · Track 2: Trustworthy stereotype classification</span>
-        <p>Built <strong>Stereotype Stompers</strong> — fine-tuned GPT-2 on a real + synthetic + EMGSD corpus to flag biased medical text and propose alternatives.</p>
-      </li>
+
       <li class="tl__item tl__item--major" data-side="left">
         <div class="tl__marker"></div>
         <time>Feb 2026</time>
@@ -281,7 +293,7 @@
       <li class="tl__item tl__item--future" data-side="right">
         <div class="tl__marker"></div>
         <time>Sept 2026 →</time>
-        <h4>Graduate ML / Data Science roles</h4>
+        <h4>Graduate ML / Data Science / Data Analyst / Software Engineering / Technology Consultant roles</h4>
         <span class="tl__org">Open to UK / hybrid · open to relocation</span>
         <p>Looking for a team where research-adjacent ML meets shipped product.</p>
       </li>
