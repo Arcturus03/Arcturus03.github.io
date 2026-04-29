@@ -48,9 +48,8 @@
         y: Math.random() * h,
         r: (Math.random() * 1.2 + 0.2) * dpr,
         a: Math.random() * 0.7 + 0.2,
-        s: Math.random() * 0.4 + 0.05,            // twinkle speed
-        p: Math.random() * Math.PI * 2,           // phase
-        // a few "warm" stars for the Arcturus accent
+        s: Math.random() * 0.4 + 0.05,
+        p: Math.random() * Math.PI * 2,
         warm: Math.random() < 0.08
       }));
     }
@@ -78,15 +77,18 @@
   const termEl = document.getElementById("terminal");
   if (termEl) {
     const lines = [
-      { text: "$ ssh hrithik@arcturus.systems", cls: "" },
-      { text: "auth: identity verified ✓", cls: "green", indent: "  " },
-      { text: "$ load profile.json", cls: "" },
-      { text: "name        : Hrithik Chandra", cls: "mute", indent: "  " },
-      { text: "role        : ML / Data Science · final-year BSc CS (AI)", cls: "mute", indent: "  " },
-      { text: "location    : Hatfield, UK", cls: "mute", indent: "  " },
-      { text: "interests   : graph ML · NLP · evaluation tooling · applied research", cls: "mute", indent: "  " },
-      { text: "status      : open to graduate roles & internships", cls: "accent", indent: "  " },
-      { text: "$ run portfolio.show()", cls: "" },
+      { text: "$ ssh hrithik@arcturus.systems",                                                cls: "" },
+      { text: "auth: identity verified",                                                        cls: "green",  indent: "  " },
+      { text: "$ cat profile.json",                                                             cls: "" },
+      { text: "name        : Hrithik Chandra",                                                  cls: "mute",   indent: "  " },
+      { text: "role        : generalist-leaning ML / Data Science, final-year BSc CS (AI)",     cls: "mute",   indent: "  " },
+      { text: "location    : Hatfield, UK -- open to UK / hybrid",                              cls: "mute",   indent: "  " },
+      { text: "focus       : graph ML, NLP, evaluation tooling, applied research",              cls: "mute",   indent: "  " },
+      { text: "toolbelt    : Python, PyTorch, scikit-learn, NetworkX, Java, SQL",               cls: "mute",   indent: "  " },
+      { text: "shipped     : gene-expression GNN, RetrofitIQ, Stereotype Stompers, Ipsos",      cls: "mute",   indent: "  " },
+      { text: "mantra      : build systems that endure, adapt, elevate performance",            cls: "mute",   indent: "  " },
+      { text: "status      : open to graduate roles & internships",                             cls: "accent", indent: "  " },
+      { text: "$ run portfolio.show()",                                                         cls: "" }
     ];
 
     if (reduceMotion) {
@@ -100,7 +102,6 @@
         const line = lines[li];
         const indent = line.indent || "";
         if (ci === 0) {
-          // start a new <span>
           termEl.insertAdjacentHTML("beforeend",
             `<span class="${line.cls}" data-active>${indent}</span>`);
         }
@@ -109,12 +110,12 @@
           current += line.text[ci];
           span.textContent = indent + current;
           ci++;
-          setTimeout(tick, 18 + Math.random() * 30);
+          setTimeout(tick, 12 + Math.random() * 22);
         } else {
           span.removeAttribute("data-active");
           termEl.appendChild(document.createTextNode("\n"));
           current = ""; ci = 0; li++;
-          setTimeout(tick, li === 2 || li === 8 ? 380 : 120);
+          setTimeout(tick, (li === 2 || li === 11) ? 360 : 90);
         }
       }
       setTimeout(tick, 350);
@@ -127,26 +128,23 @@
 
   /* -------------------------------------------------------
      4. Animated GRN graph (FYP feature)
-        Lightweight force-directed sim with pulsing nodes
   ------------------------------------------------------- */
   const grnCanvas = document.getElementById("grnCanvas");
   if (grnCanvas && !reduceMotion) {
     const ctx = grnCanvas.getContext("2d");
     let W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    // Build a small synthetic GRN: scale-free-ish topology
-    const N = 24;                       // gene nodes
+    const N = 24;
     const nodes = [];
     const edges = [];
     for (let i = 0; i < N; i++) {
       nodes.push({
         x: 0, y: 0, vx: 0, vy: 0,
         r: 4 + Math.random() * 3,
-        fire: 0,                        // 0..1 firing intensity
+        fire: 0,
         nextFire: Math.random() * 5
       });
     }
-    // Preferential attachment-ish edges
     for (let i = 1; i < N; i++) {
       const targets = new Set();
       const k = 1 + (Math.random() < 0.4 ? 1 : 0) + (Math.random() < 0.15 ? 1 : 0);
@@ -174,27 +172,24 @@
       placeNodes();
     }
 
-    // Force sim params
     const REPEL = 9000;
     const SPRING = 0.0015;
     const SPRING_LEN = 110;
     const DAMP = 0.86;
 
     function step(dt) {
-      // pairwise repulsion
       for (let i = 0; i < N; i++) {
         for (let j = i + 1; j < N; j++) {
           const a = nodes[i], b = nodes[j];
-          let dx = a.x - b.x, dy = a.y - b.y;
-          let d2 = dx * dx + dy * dy + 0.01;
-          let d = Math.sqrt(d2);
-          let f = REPEL / d2;
-          let fx = (dx / d) * f, fy = (dy / d) * f;
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx * dx + dy * dy + 0.01;
+          const d = Math.sqrt(d2);
+          const f = REPEL / d2;
+          const fx = (dx / d) * f, fy = (dy / d) * f;
           a.vx += fx * dt; a.vy += fy * dt;
           b.vx -= fx * dt; b.vy -= fy * dt;
         }
       }
-      // spring along edges
       for (const e of edges) {
         const a = nodes[e.a], b = nodes[e.b];
         const dx = b.x - a.x, dy = b.y - a.y;
@@ -204,14 +199,12 @@
         a.vx += fx * dt; a.vy += fy * dt;
         b.vx -= fx * dt; b.vy -= fy * dt;
       }
-      // gentle pull to centre
       const cx = W / 2, cy = H / 2;
       for (const n of nodes) {
         n.vx += (cx - n.x) * 0.00006 * dt;
         n.vy += (cy - n.y) * 0.00006 * dt;
         n.vx *= DAMP; n.vy *= DAMP;
         n.x += n.vx; n.y += n.vy;
-        // bounds
         const m = 30 * dpr;
         if (n.x < m) { n.x = m; n.vx *= -0.4; }
         if (n.y < m) { n.y = m; n.vy *= -0.4; }
@@ -220,18 +213,14 @@
       }
     }
 
-    function fireAndPropagate(t) {
-      // Each node has its own next-fire schedule
+    function fireAndPropagate() {
       for (let i = 0; i < N; i++) {
         const n = nodes[i];
         n.nextFire -= 0.016;
         if (n.nextFire <= 0) {
           n.fire = 1;
           n.nextFire = 2 + Math.random() * 5;
-          // propagate down outgoing edges
-          for (const e of edges) {
-            if (e.a === i) e.pulse = 1;
-          }
+          for (const e of edges) if (e.a === i) e.pulse = 1;
         }
         n.fire *= 0.96;
       }
@@ -242,10 +231,9 @@
     function frame(t) {
       const dt = Math.min(2, (t - last) / 16); last = t;
       step(dt);
-      fireAndPropagate(t);
+      fireAndPropagate();
       ctx.clearRect(0, 0, W, H);
 
-      // edges
       for (const e of edges) {
         const a = nodes[e.a], b = nodes[e.b];
         ctx.beginPath();
@@ -259,25 +247,18 @@
         ctx.stroke();
       }
 
-      // nodes
       for (const n of nodes) {
         const fire = n.fire;
         const r = n.r * dpr * (1 + fire * 0.6);
-
-        // outer glow
         const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4);
         grad.addColorStop(0, fire > 0.2 ? `rgba(255, 138, 61, ${0.45 * fire + 0.05})` : "rgba(108,180,255,0.12)");
         grad.addColorStop(1, "rgba(0,0,0,0)");
         ctx.fillStyle = grad;
         ctx.beginPath(); ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2); ctx.fill();
 
-        // core
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        const core = fire > 0.2
-          ? `rgba(255, 200, 140, ${0.85})`
-          : `rgba(180, 210, 255, 0.9)`;
-        ctx.fillStyle = core;
+        ctx.fillStyle = fire > 0.2 ? "rgba(255, 200, 140, 0.85)" : "rgba(180, 210, 255, 0.9)";
         ctx.fill();
       }
 
@@ -305,6 +286,27 @@
     if (observer) observer.observe(el);
     else el.classList.add("in-view");
   });
+
+  /* Word reveal — sequential side-by-side fade-in once the intro
+     scrolls into view. Plays exactly once. */
+  const wr = document.querySelector(".word-reveal");
+  if (wr) {
+    if (reduceMotion) {
+      wr.classList.add("is-revealed");
+    } else if ("IntersectionObserver" in window) {
+      const wo = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            wr.classList.add("is-revealed");
+            wo.unobserve(wr);
+          }
+        });
+      }, { threshold: 0.4 });
+      wo.observe(wr);
+    } else {
+      wr.classList.add("is-revealed");
+    }
+  }
 
   /* -------------------------------------------------------
      6. Projects: data → cards, filterable
@@ -392,7 +394,6 @@
       </li>
     `).join("");
 
-    // hover tracking for the radial highlight
     cardsEl.querySelectorAll(".card").forEach(card => {
       card.addEventListener("mousemove", (ev) => {
         const r = card.getBoundingClientRect();
@@ -401,7 +402,6 @@
       });
     });
 
-    // filters
     document.querySelectorAll(".filters .chip").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".filters .chip").forEach(b => b.classList.remove("is-active"));
@@ -423,45 +423,19 @@
     const SVG_NS = "http://www.w3.org/2000/svg";
 
     const clusters = [
-      {
-        title: "LANGUAGES",
-        color: "var(--accent)",
-        cx: 180, cy: 130,
-        skills: ["Python", "Java", "JavaScript", "SQL", "HTML / CSS"]
-      },
-      {
-        title: "ML & DATA",
-        color: "var(--accent-2)",
-        cx: 510, cy: 130,
-        skills: ["PyTorch", "PyTorch Geometric", "scikit-learn", "pandas", "numpy", "NetworkX", "matplotlib", "scipy"]
-      },
-      {
-        title: "TOOLS & FRAMEWORKS",
-        color: "var(--accent-cool)",
-        cx: 180, cy: 380,
-        skills: ["Git / GitHub", "Jupyter", "VS Code", "Flask", "MongoDB", "React", "Leaflet"]
-      },
-      {
-        title: "CONCEPTS",
-        color: "#9ee7c5",
-        cx: 510, cy: 380,
-        skills: ["OOP", "MVC", "Design Patterns", "REST APIs", "Agile / Scrum", "ML / DL", "NLP", "CI/CD"]
-      }
+      { title: "LANGUAGES",          color: "#ff8a3d", cx: 180, cy: 130, skills: ["Python", "Java", "JavaScript", "SQL", "HTML / CSS"] },
+      { title: "ML & DATA",          color: "#f5b942", cx: 510, cy: 130, skills: ["PyTorch", "PyTorch Geometric", "scikit-learn", "pandas", "numpy", "NetworkX", "matplotlib", "scipy"] },
+      { title: "TOOLS & FRAMEWORKS", color: "#6cb4ff", cx: 180, cy: 380, skills: ["Git / GitHub", "Jupyter", "VS Code", "Flask", "MongoDB", "React", "Leaflet"] },
+      { title: "CONCEPTS",           color: "#9ee7c5", cx: 510, cy: 380, skills: ["OOP", "MVC", "Design Patterns", "REST APIs", "Agile / Scrum", "ML / DL", "NLP", "CI/CD"] }
     ];
 
-    // Layout each cluster as a small ring around its centre
     clusters.forEach((cl, idx) => {
       const radius = 80;
       const positions = cl.skills.map((s, i) => {
         const angle = (i / cl.skills.length) * Math.PI * 2 - Math.PI / 2 + idx * 0.3;
-        return {
-          name: s,
-          x: cl.cx + Math.cos(angle) * radius,
-          y: cl.cy + Math.sin(angle) * radius
-        };
+        return { name: s, x: cl.cx + Math.cos(angle) * radius, y: cl.cy + Math.sin(angle) * radius };
       });
 
-      // edges from centre to each
       positions.forEach(p => {
         const line = document.createElementNS(SVG_NS, "line");
         line.setAttribute("x1", cl.cx);
@@ -471,7 +445,6 @@
         line.setAttribute("class", "skill-line");
         constSvg.appendChild(line);
       });
-      // also a few inter-skill chords for "constellation" feel
       for (let i = 0; i < positions.length; i++) {
         const j = (i + 1) % positions.length;
         if (Math.random() < 0.55) {
@@ -485,7 +458,6 @@
         }
       }
 
-      // central anchor
       const anchor = document.createElementNS(SVG_NS, "circle");
       anchor.setAttribute("cx", cl.cx);
       anchor.setAttribute("cy", cl.cy);
@@ -494,7 +466,6 @@
       anchor.setAttribute("opacity", "0.35");
       constSvg.appendChild(anchor);
 
-      // cluster title
       const title = document.createElementNS(SVG_NS, "text");
       title.setAttribute("x", cl.cx);
       title.setAttribute("y", cl.cy - 100);
@@ -503,7 +474,6 @@
       title.textContent = cl.title;
       constSvg.appendChild(title);
 
-      // each star + label
       positions.forEach(p => {
         const node = document.createElementNS(SVG_NS, "circle");
         node.setAttribute("cx", p.x);
@@ -517,9 +487,8 @@
         node.appendChild(ttl);
         constSvg.appendChild(node);
 
-        // label below the node, offset away from centre
         const dx = p.x - cl.cx, dy = p.y - cl.cy;
-        const len = Math.sqrt(dx*dx + dy*dy);
+        const len = Math.sqrt(dx * dx + dy * dy);
         const lx = p.x + (dx / len) * 14;
         const ly = p.y + (dy / len) * 14;
         const label = document.createElementNS(SVG_NS, "text");
@@ -532,7 +501,6 @@
       });
     });
 
-    // glow filter
     const defs = document.createElementNS(SVG_NS, "defs");
     defs.innerHTML = `
       <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
