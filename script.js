@@ -73,28 +73,31 @@
 
   /* -------------------------------------------------------
      3. Hero terminal typing intro
+        Renders each line as a block-level <div class="line">
+        so wrapped value text aligns after the colon (CSS handles
+        the hanging indent via padding-left + negative text-indent).
   ------------------------------------------------------- */
   const termEl = document.getElementById("terminal");
   if (termEl) {
     const lines = [
-      { text: "$ ssh hrithik@arcturus.systems",                                                cls: "" },
-      { text: "auth: identity verified",                                                        cls: "green",  indent: "  " },
-      { text: "$ cat profile.json",                                                             cls: "" },
-      { text: "name        : Hrithik Chandra",                                                  cls: "mute",   indent: "  " },
-      { text: "role        : generalist-leaning ML / Data Science, final-year BSc CS (AI)",     cls: "mute",   indent: "  " },
-      { text: "location    : Hatfield, UK -- open to UK / hybrid",                              cls: "mute",   indent: "  " },
-      { text: "focus       : graph ML, NLP, evaluation tooling, applied research",              cls: "mute",   indent: "  " },
-      { text: "toolbelt    : Python, PyTorch, scikit-learn, NetworkX, Java, SQL",               cls: "mute",   indent: "  " },
-      { text: "shipped     : gene-expression GNN, RetrofitIQ, Stereotype Stompers, Ipsos",      cls: "mute",   indent: "  " },
-      { text: "mantra      : build systems that endure, adapt, elevate performance",            cls: "mute",   indent: "  " },
-      { text: "status      : open to graduate roles & internships",                             cls: "accent", indent: "  " },
-      { text: "$ run portfolio.show()",                                                         cls: "" }
+      { text: "$ ssh hrithik@arcturus.systems",                                                                     cls: "" },
+      { text: "auth: identity verified",                                                                             cls: "green",  indent: "  " },
+      { text: "$ cat profile.json",                                                                                  cls: "" },
+      { text: "name        : Hrithik Chandra",                                                                       cls: "mute",   indent: "  " },
+      { text: "role        : generalist-leaning ML / Data Science, final-year BSc CS (AI)",                          cls: "mute",   indent: "  " },
+      { text: "location    : Hatfield, UK -- open to UK / hybrid / remote",                                          cls: "mute",   indent: "  " },
+      { text: "focus       : ML, Data Science, NLP, applied research",                                               cls: "mute",   indent: "  " },
+      { text: "toolbelt    : Python, PyTorch, Pandas, Numpy, Scipy, Matplotlib, scikit-learn, NetworkX, Java, SQL",  cls: "mute",   indent: "  " },
+      { text: "shipped     : gene-expression GNN, RetrofitIQ, Stereotype Stompers, Ipsos",                           cls: "mute",   indent: "  " },
+      { text: "aim         : build systems that endure, adapt, elevate performance",                                 cls: "mute",   indent: "  " },
+      { text: "status      : open to graduate roles & internships",                                                  cls: "accent", indent: "  " },
+      { text: "$ run portfolio.show()",                                                                              cls: "" }
     ];
 
     if (reduceMotion) {
       termEl.innerHTML = lines.map(l =>
-        `<span class="${l.cls}">${(l.indent || "")}${escapeHtml(l.text)}</span>`
-      ).join("\n");
+        `<div class="line ${l.cls}">${(l.indent || "")}${escapeHtml(l.text)}</div>`
+      ).join("");
     } else {
       let li = 0, ci = 0, current = "";
       function tick() {
@@ -103,22 +106,23 @@
         const indent = line.indent || "";
         if (ci === 0) {
           termEl.insertAdjacentHTML("beforeend",
-            `<span class="${line.cls}" data-active>${indent}</span>`);
+            `<div class="line ${line.cls}" data-active>${indent}</div>`);
         }
         const span = termEl.querySelector("[data-active]");
         if (ci < line.text.length) {
           current += line.text[ci];
           span.textContent = indent + current;
           ci++;
-          setTimeout(tick, 12 + Math.random() * 22);
+          // Slower per-char typing for a weightier feel.
+          setTimeout(tick, 22 + Math.random() * 34);
         } else {
           span.removeAttribute("data-active");
-          termEl.appendChild(document.createTextNode("\n"));
           current = ""; ci = 0; li++;
-          setTimeout(tick, (li === 2 || li === 11) ? 360 : 90);
+          // Longer beats after `auth` and before final `run`.
+          setTimeout(tick, (li === 2 || li === 11) ? 540 : 150);
         }
       }
-      setTimeout(tick, 350);
+      setTimeout(tick, 480);
     }
 
     function escapeHtml(s) {
@@ -402,14 +406,61 @@
       });
     });
 
-    document.querySelectorAll(".filters .chip").forEach(btn => {
+    document.querySelectorAll('[data-filter]').forEach(btn => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".filters .chip").forEach(b => b.classList.remove("is-active"));
+        document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove("is-active"));
         btn.classList.add("is-active");
         const f = btn.dataset.filter;
         cardsEl.querySelectorAll(".card").forEach(c => {
           const tags = c.dataset.tags.split(" ");
           c.classList.toggle("is-hidden", f !== "all" && !tags.includes(f));
+        });
+      });
+    });
+  }
+
+  /* -------------------------------------------------------
+     6b. Certifications & awards: data → cards, filterable
+         Ordered most-recent-first.
+  ------------------------------------------------------- */
+  const CERTS = [
+    { date: "2025 — present", title: "IBM Data Science Professional Certificate",        issuer: "Coursera · IBM",                                              cat: "technical",   status: "in progress" },
+    { date: "2023 — 24",      title: "BCS · UH Computer Science Chapter Member",          issuer: "BCS · University of Hertfordshire Students' Union",          cat: "recognition" },
+    { date: "2024",           title: "Student Rep Award — Silver Level",                  issuer: "University of Hertfordshire Rep Excellence Programme",       cat: "recognition" },
+    { date: "Sept 2024",      title: "CSLA Level 2 — Community & Sports Leadership Award", issuer: "UK Coaching",                                                cat: "leadership" },
+    { date: "Sept 2024",      title: "FAA Level 3 — Emergency First Aid at Work (RQF)",   issuer: "Nuco Training",                                              cat: "safety" },
+    { date: "Sept 2024",      title: "Adult Safeguarding in Physical Activity & Sport",   issuer: "UK Coaching",                                                cat: "safety" },
+    { date: "Aug 2024",       title: "Go Herts Award — Bronze",                            issuer: "University of Hertfordshire",                                cat: "recognition" },
+    { date: "2023 — 24",      title: "Student Rep Award — Bronze Level",                  issuer: "University of Hertfordshire Rep Excellence Programme",       cat: "recognition" },
+    { date: "Jan 2023",       title: "Intro to CS & Programming Specialization",          issuer: "Goldsmiths, University of London (Coursera)",                cat: "technical" }
+  ];
+
+  const CERT_CAT_LABEL = {
+    technical:   "Technical",
+    recognition: "Recognition",
+    leadership:  "Leadership",
+    safety:      "Safety"
+  };
+
+  const certsGridEl = document.getElementById("certsGrid");
+  if (certsGridEl) {
+    certsGridEl.innerHTML = CERTS.map(c => `
+      <li class="cert" data-cat="${c.cat}">
+        <span class="cert__date">${c.date}</span>
+        <h3 class="cert__title">${c.title}</h3>
+        <p class="cert__issuer">${c.issuer}</p>
+        ${c.status ? `<span class="cert__status">${c.status}</span>` : ""}
+        <span class="cert__cat" data-cat="${c.cat}">${CERT_CAT_LABEL[c.cat]}</span>
+      </li>
+    `).join("");
+
+    document.querySelectorAll('[data-cert-filter]').forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll('[data-cert-filter]').forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        const f = btn.dataset.certFilter;
+        certsGridEl.querySelectorAll(".cert").forEach(c => {
+          c.classList.toggle("is-hidden", f !== "all" && c.dataset.cat !== f);
         });
       });
     });
